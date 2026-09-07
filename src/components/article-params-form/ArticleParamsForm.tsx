@@ -31,12 +31,15 @@ export const ArticleParamsForm = ({
 	const [formState, setFormState] = useState<ArticleStateType>(currentState);
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-	const sidebarRef = useRef<HTMLDivElement>(null);
+	const sidebarRef = useRef<HTMLElement>(null);
 
 	useEffect(() => {
+		if (!isSidebarOpen) {
+			return;
+		}
+
 		const handleClickOutside = (event: MouseEvent) => {
 			if (
-				isSidebarOpen &&
 				sidebarRef.current &&
 				!sidebarRef.current.contains(event.target as Node)
 			) {
